@@ -35,4 +35,9 @@ class ResponseTest < Test::Unit::TestCase
     assert_equal 'M', cvv_result['code']
     assert_equal CVVResult.messages['M'], cvv_result['message']
   end
+
+  def test_authorization_code
+    response = Response.new(true, 'message', {}, :authorization_code => '123')
+    assert_equal response.authorization_code, '123'
+  end
 end

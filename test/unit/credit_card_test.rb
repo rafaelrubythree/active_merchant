@@ -440,4 +440,10 @@ class CreditCardTest < Test::Unit::TestCase
   def test_should_not_report_as_emv_if_icc_data_not_present
     refute CreditCard.new.emv?
   end
+
+  def test_track2_accessor
+    credit_card = CreditCard.new
+    credit_card.track2 = "data"
+    assert_equal credit_card.track2, "data"
+  end
 end

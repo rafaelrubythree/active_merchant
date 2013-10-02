@@ -146,7 +146,7 @@ module ActiveMerchant
       end
       
       # http://www.gae.ucm.es/~padilla/extrawork/tracks.html
-      def add_creditcard(post, creditcard)
+      def add_creditcard(post, creditcard, options = {})
         super(post, creditcard)
         unless creditcard.track2.blank?
           post[:track2] = creditcard.track2

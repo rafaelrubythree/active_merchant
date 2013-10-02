@@ -58,6 +58,11 @@ module ActiveMerchant #:nodoc:
       self.require_name = true
       self.require_verification_value = true
 
+      # Track data for card-present transactions
+      #
+      # @return [String]
+      attr_accessor :track2
+
       # Returns or sets the credit card number.
       #
       # @return [String]
