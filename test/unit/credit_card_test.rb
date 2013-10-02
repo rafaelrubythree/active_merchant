@@ -379,4 +379,10 @@ class CreditCardTest < Test::Unit::TestCase
       assert_equal @solo.type, @solo.brand
     end
   end
+
+  def test_track2_accessor
+    credit_card = CreditCard.new
+    credit_card.track2 = "data"
+    assert_equal credit_card.track2, "data"
+  end
 end
