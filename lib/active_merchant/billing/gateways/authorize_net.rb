@@ -402,7 +402,7 @@ module ActiveMerchant #:nodoc:
           post[:zip]     = address[:zip].to_s
           post[:city]    = address[:city].to_s
           post[:country] = address[:country].to_s
-          post[:state]   = address[:state].blank?  ? 'n/a' : address[:state]
+          post[:state]   = address[:state].to_s
         end
 
         if address = options[:shipping_address]
@@ -414,7 +414,7 @@ module ActiveMerchant #:nodoc:
           post[:ship_to_zip]     = address[:zip].to_s
           post[:ship_to_city]    = address[:city].to_s
           post[:ship_to_country] = address[:country].to_s
-          post[:ship_to_state]   = address[:state].blank?  ? 'n/a' : address[:state]
+          post[:ship_to_state]   = address[:state].to_s
         end
       end
 
