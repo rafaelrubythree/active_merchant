@@ -15,6 +15,19 @@ class AuthorizeNetTest < Test::Unit::TestCase
     @check = check
   end
 
+  def test_reject_blank_post_values
+    response = stub_comms do
+      @gateway.authorize(@amount, @check)
+    end.check_request do |endpoint, data, headers|
+      assert_no_match(/x_invoice_num=/, data)
+    end.respond_with(successful_authorization_response)
+
+    assert response
+    assert_instance_of Response, response
+    assert_success response
+    assert_equal '508141794', response.authorization
+  end
+
   def test_successful_echeck_authorization
     response = stub_comms do
       @gateway.authorize(@amount, @check)

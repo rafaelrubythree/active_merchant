@@ -329,7 +329,10 @@ module ActiveMerchant #:nodoc:
         post[:encap_char]     = "$"
         post[:solution_ID]    = application_id if application_id.present? && application_id != "ActiveMerchant"
 
-        request = post.merge(parameters).collect { |key, value| "x_#{key}=#{CGI.escape(value.to_s)}" }.sort.join("&")
+        request = post.merge(parameters).
+          reject {|key, value| value.blank?}.
+          map { |key, value| "x_#{key}=#{CGI.escape(value.to_s)}" }.
+          sort.join("&")
         request
       end
 
