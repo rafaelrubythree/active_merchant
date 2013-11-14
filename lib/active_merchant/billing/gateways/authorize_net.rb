@@ -330,7 +330,7 @@ module ActiveMerchant #:nodoc:
         post[:solution_ID]    = application_id if application_id.present? && application_id != "ActiveMerchant"
 
         request = post.merge(parameters).
-          reject {|key, value| value.blank?}.
+          reject {|key, value| value.nil? || value == ""}.
           map { |key, value| "x_#{key}=#{CGI.escape(value.to_s)}" }.
           sort.join("&")
         request
@@ -376,7 +376,7 @@ module ActiveMerchant #:nodoc:
       def add_customer_data(post, options)
         if options.has_key? :email
           post[:email] = options[:email]
-          post[:email_customer] = false
+          post[:email_customer] = "FALSE"
         end
 
         if options.has_key? :customer

@@ -54,6 +54,19 @@ class AuthorizeNetTest < Test::Unit::TestCase
     assert_equal '508141794', response.authorization
   end
 
+  def test_email_post_values
+    response = stub_comms do
+      @gateway.authorize(@amount, @credit_card, :email => "test@example.com")
+    end.check_request do |endpoint, data, headers|
+      assert_match(/x_email=test%40example.com/, data)
+      assert_match(/x_email_customer=FALSE/, data)
+    end.respond_with(successful_authorization_response)
+
+    assert response
+    assert_instance_of Response, response
+    assert_success response
+  end
+
   def test_successful_echeck_authorization
     response = stub_comms do
       @gateway.authorize(@amount, @check)
