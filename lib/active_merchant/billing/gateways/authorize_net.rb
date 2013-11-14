@@ -337,7 +337,7 @@ module ActiveMerchant #:nodoc:
       end
 
       def add_currency_code(post, money, options)
-        post[:currency_code] = options[:currency] || currency(money)
+        post[:currency_code] = options.fetch(:currency) { currency(money) }
       end
 
       def add_invoice(post, options)

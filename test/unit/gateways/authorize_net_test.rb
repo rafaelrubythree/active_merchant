@@ -15,9 +15,35 @@ class AuthorizeNetTest < Test::Unit::TestCase
     @check = check
   end
 
+  def test_default_currency_code
+    response = stub_comms do
+      @gateway.authorize(@amount, @credit_card)
+    end.check_request do |endpoint, data, headers|
+      assert_match(/x_currency_code=USD/, data)
+    end.respond_with(successful_authorization_response)
+
+    assert response
+    assert_instance_of Response, response
+    assert_success response
+    assert_equal '508141794', response.authorization
+  end
+
+  def test_nil_currency_code
+    response = stub_comms do
+      @gateway.authorize(@amount, @credit_card, :currency => nil)
+    end.check_request do |endpoint, data, headers|
+      assert_no_match(/x_currency_code=USD/, data)
+    end.respond_with(successful_authorization_response)
+
+    assert response
+    assert_instance_of Response, response
+    assert_success response
+    assert_equal '508141794', response.authorization
+  end
+
   def test_reject_blank_post_values
     response = stub_comms do
-      @gateway.authorize(@amount, @check)
+      @gateway.authorize(@amount, @credit_card)
     end.check_request do |endpoint, data, headers|
       assert_no_match(/x_invoice_num=/, data)
     end.respond_with(successful_authorization_response)
