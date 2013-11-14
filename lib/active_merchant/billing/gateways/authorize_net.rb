@@ -299,7 +299,10 @@ module ActiveMerchant #:nodoc:
 
         xml.customer do
           xml.id(options[:customer]) unless empty?(options[:customer]) || options[:customer] !~ /^\d+$/
-          xml.email(options[:email]) unless empty?(options[:email])
+          unless empty?(options[:email])
+            xml.email(options[:email])
+            xml.email_customer("FALSE")
+          end
         end
 
         xml.billTo do
