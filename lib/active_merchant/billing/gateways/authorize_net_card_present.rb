@@ -148,11 +148,10 @@ module ActiveMerchant
       # http://www.gae.ucm.es/~padilla/extrawork/tracks.html
       def add_creditcard(post, creditcard, options = {})
         super(post, creditcard)
-        unless creditcard.track2.blank?
-          post[:track2] = creditcard.track2
-          post.delete :card_num
-          post.delete :card_code
-          post.delete :exp_date
+        if options[:track_type] == 2
+          post[:track2] = creditcard.track_data
+        else
+          post[:track1] = creditcard.track_data
         end
       end
     end
