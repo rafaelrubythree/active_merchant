@@ -35,6 +35,7 @@ module ActiveMerchant #:nodoc:
         '24' => STANDARD_ERROR_CODE[:pickup_card]
       }
 
+      self.ssl_version = :TLSv1
       class_attribute :duplicate_window
 
       APPROVED, DECLINED, ERROR, FRAUD_REVIEW = 1, 2, 3, 4

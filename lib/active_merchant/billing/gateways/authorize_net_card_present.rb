@@ -8,7 +8,7 @@ module ActiveMerchant
       
       self.test_url = 'https://test.authorize.net/gateway/transact.dll'
       self.live_url = 'https://cardpresent.authorize.net/gateway/transact.dll'
-      
+      self.ssl_version = :TLSv1
       # Only one supported market type
       MARKET_TYPE_RETAIL = 2
       
