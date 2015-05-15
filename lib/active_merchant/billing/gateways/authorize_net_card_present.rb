@@ -82,37 +82,7 @@ module ActiveMerchant
       end      
       
       private
-      
-      def commit(action, money, parameters)
-        parameters[:amount] = amount(money) unless action == 'VOID'
 
-        # Only activate the test_request when the :test option is passed in
-        parameters[:test_request] = (@options[:test] || test?) ? 'TRUE' : 'FALSE'
-
-        url = test? ? self.test_url : self.live_url
-        data = ssl_post url, post_data(action, parameters)
-
-        response = parse(data)
-
-        message = message_from(response)
-
-        # Return the response. The authorization can be taken out of the transaction_id
-        # Test Mode on/off is something we have to parse from the response text.
-        # It usually looks something like this
-        #
-        #   (TESTMODE) Successful Sale
-        test_mode = test? || message =~ /TESTMODE/
-
-        Response.new(success?(response), message, response, 
-          :test => test_mode, 
-          :authorization => response[:transaction_id],
-          :authorization_code => response[:authorization_code],
-          :fraud_review => fraud_review?(response),
-          :avs_result => { :code => response[:avs_result_code] },
-          :cvv_result => response[:card_code]
-        )
-      end
-         
       def parse(body)
         fields = split(body)
 
