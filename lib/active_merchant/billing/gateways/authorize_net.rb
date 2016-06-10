@@ -29,10 +29,10 @@ module ActiveMerchant #:nodoc:
       class_attribute :arb_test_url, :arb_live_url
 
       self.test_url = "https://test.authorize.net/gateway/transact.dll"
-      self.live_url = "https://secure.authorize.net/gateway/transact.dll"
+      self.live_url = "https://secure2.authorize.net/gateway/transact.dll"
 
       self.arb_test_url = 'https://apitest.authorize.net/xml/v1/request.api'
-      self.arb_live_url = 'https://api.authorize.net/xml/v1/request.api'
+      self.arb_live_url = 'https://api2.authorize.net/xml/v1/request.api'
       self.ssl_version = :TLSv1
       class_attribute :duplicate_window
 
