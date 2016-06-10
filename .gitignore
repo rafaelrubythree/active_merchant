@@ -7,3 +7,6 @@ Gemfile.lock
 Gemfile*.lock
 .rbx/
 *.swp
+*.DS_Store
+tags
+
