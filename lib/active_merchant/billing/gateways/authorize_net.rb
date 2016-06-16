@@ -319,15 +319,16 @@ module ActiveMerchant #:nodoc:
       def post_data(action, parameters = {})
         post = {}
 
-        post[:version]        = API_VERSION
-        post[:login]          = @options[:login]
-        post[:tran_key]       = @options[:password]
-        post[:relay_response] = "FALSE"
-        post[:type]           = action
-        post[:delim_data]     = "TRUE"
-        post[:delim_char]     = ","
-        post[:encap_char]     = "$"
-        post[:solution_ID]    = application_id if application_id.present? && application_id != "ActiveMerchant"
+        post[:version]         = API_VERSION
+        post[:login]           = @options[:login]
+        post[:tran_key]        = @options[:password]
+        post[:relay_response]  = "FALSE"
+        post[:type]            = action
+        post[:delim_data]      = "TRUE"
+        post[:delim_char]      = ","
+        post[:encap_char]      = "$"
+        post[:response_format] = 2
+        post[:solution_ID]     = application_id if application_id.present? && application_id != "ActiveMerchant"
 
         request = post.merge(parameters).
           reject {|key, value| value.nil? || value == ""}.
