@@ -7,3 +7,4 @@ Gemfile.lock
 Gemfile*.lock
 .rbx/
 *.swp
+tags

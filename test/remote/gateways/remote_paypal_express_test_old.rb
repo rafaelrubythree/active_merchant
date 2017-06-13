@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PaypalExpressTest < Test::Unit::TestCase
   def setup
-    Base.mode = :test
+    Base.gateway_mode = :test
     
     @gateway = PaypalExpressGateway.new(fixtures(:paypal_certificate))
   

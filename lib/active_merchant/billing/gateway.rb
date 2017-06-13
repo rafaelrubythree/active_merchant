@@ -90,6 +90,9 @@ module ActiveMerchant #:nodoc:
       class_attribute :supported_cardtypes
       self.supported_cardtypes = []
 
+      class_attribute :currencies_without_fractions
+      self.currencies_without_fractions = %w(BIF BYR CLP CVE DJF GNF HUF ISK JPY KMF KRW PYG RWF UGX VND VUV XAF XOF XPF)
+
       class_attribute :homepage_url
       class_attribute :display_name
 
